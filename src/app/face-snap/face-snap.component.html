@@ -1,13 +1,27 @@
-<div class="face-snap-card">
+<!--div class="face-snap-card">
     <h2>{{ title }}</h2>
     <p>Mis en ligne le {{ createdDate }}</p>
     <!-- string interpolation -->
     <!--img src="{{ imageUrl }}" alt="{{ title }}"-->
     <!-- attribute binding -->
-    <img [src]="imageUrl" [alt]="title">
+    <!--img [src]="imageUrl" [alt]="title">
     <p>{{ description }}</p>
     <p>
         <button (click)="onSnap()">{{ buttonText }}</button>
         🤌 {{ snaps }}
+    </p>
+</div-->
+
+<div class="face-snap-card" [ngClass] = "{ snapped: buttonText === 'Oops, unSnap!' }">
+    <figcaption>{{ 0.477 | percent }}</figcaption>
+    <h2>{{ faceSnap.title | uppercase}}</h2>
+    <p>Mis en ligne {{ faceSnap.createdDate | date : 'le dd/MM/yyyy à hh:mm'}}</p>
+    <!-- attribute binding -->
+    <img [src]="faceSnap.imageUrl" [alt]="faceSnap.title">
+    <p>{{ faceSnap.description }}</p>
+    <p *ngIf="faceSnap.location">Photo prise à {{ faceSnap.location }}</p>
+    <p>
+      <button (click)="onSnap()">{{ buttonText }}</button>
+      <strong><span [ngStyle]="{ color: 'rgb(0, ' + faceSnap.snaps + ', 0)' }">{{ faceSnap.snaps }}</span></strong>
     </p>
 </div>
